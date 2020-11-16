@@ -1,0 +1,12 @@
+{
+  "name": "kh_nodejs_vergil",
+  "version": "0.0.1",
+  "description": "node js training",
+  "main": "index.js",
+  "repository": "https://github.com/imyagnesh/kh_nodejs_vergil.git",
+  "author": "Yagnesh Modh",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.4.0"
+  }
+}
