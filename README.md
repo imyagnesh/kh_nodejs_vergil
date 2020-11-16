@@ -11,3 +11,7 @@ for push the code in repository
 git add . 
 *or*
 git add filenamee
+
+git commit -m "message"
+
+
