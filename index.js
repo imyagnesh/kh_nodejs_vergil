@@ -1,20 +1,43 @@
-// REPL
+const events = require('events');
 
-// R -> Read
-// E -> Eval
-// P -> Print
-// L -> Loop
+const eventEmmiter = new events.EventEmitter();
 
-var http = require('http');
+const lisner1 = function listner1() {
+  console.log('lisner 1 executed');
+};
 
-http.createServer(function(req, res) {
-    res.writeHead(200, {
-        'Content-Type': 'text/plain'
-    })
-    res.end('Hello World')
-}).listen(8081);
+const lisner2 = function lisner2() {
+  console.log('lisner 2 executed');
+};
 
-console.log('Server running on port 8081');
+eventEmmiter.addListener('connection', lisner1);
+eventEmmiter.on('connection', lisner2);
 
+eventEmmiter.emit('connection');
 
+eventEmmiter.removeListener('connection', lisner1);
 
+eventEmmiter.emit('connection');
+
+// var connectHandler = function connected() {
+//     console.log('connected')
+//     eventEmmiter.emit('data_recived')
+// }
+
+// // register connection event
+// eventEmmiter.once('connection', connectHandler);
+
+// // register data_recived event
+// eventEmmiter.on('data_recived', function() {
+//     console.log('data recieved succesfully')
+// })
+
+// // call connection event
+// eventEmmiter.emit('connection');
+// eventEmmiter.emit('connection');
+
+// // addLisner
+// // once
+// // removeLisner
+// // removeAllLisner
+// // setMaxLisner(n)
