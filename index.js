@@ -1,23 +1,42 @@
 const fs = require('fs');
 var buff = new Buffer(1024);
 
-fs.open('input.txt', 'r+', function (err, fd) {
+// open file
+// read / manipulate fie
+// close file
+
+fs.unlink('output2.txt', function (err) {
   if (err) {
     console.error(err);
   }
-  console.log('file is oppened');
-  console.log('start reading');
-
-  fs.read(fd, buff, 0, buff.length, 0, function (err1, bytes) {
-    if (err1) {
-      console.error(err1);
-    }
-
-    if (bytes > 0) {
-      console.log(buff.toString());
-    }
-  });
+  console.log('file is is deleted');
 });
+
+// fs.open('input.txt', 'r+', function (err, fd) {
+//   if (err) {
+//     console.error(err);
+//   }
+//   console.log('file is oppened');
+//   console.log('start reading');
+
+//   fs.truncate(fd, 10, function (err1) {
+//     if (err1) {
+//       console.error(err1);
+//     }
+//   });
+
+//   fs.close(fd, function () {});
+
+//   //   fs.read(fd, buff, 0, buff.length, 0, function (err1, bytes) {
+//   //     if (err1) {
+//   //       console.error(err1);
+//   //     }
+
+//   //     if (bytes > 0) {
+//   //       console.log(buff.toString());
+//   //     }
+//   //   });
+// });
 
 // r -> reading
 // r+ -> reading and writing , if file not exist then it will give error
