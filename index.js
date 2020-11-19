@@ -1,23 +1,23 @@
 const fs = require('fs');
 var buff = new Buffer(1024);
 
-// fs.open('input.txt', 'r+', function (err, fd) {
-//   if (err) {
-//     console.error(err);
-//   }
-//   console.log('file is oppened');
-//   console.log('start reading');
+fs.open('input.txt', 'r+', function (err, fd) {
+  if (err) {
+    console.error(err);
+  }
+  console.log('file is oppened');
+  console.log('start reading');
 
-//   fs.read(fd, buff, 0, buff.length, 0, function (err1, bytes) {
-//     if (err1) {
-//       console.error(err1);
-//     }
+  fs.read(fd, buff, 0, buff.length, 0, function (err1, bytes) {
+    if (err1) {
+      console.error(err1);
+    }
 
-//     if (bytes > 0) {
-//       console.log(buff.toString());
-//     }
-//   });
-// });
+    if (bytes > 0) {
+      console.log(buff.toString());
+    }
+  });
+});
 
 // r -> reading
 // r+ -> reading and writing , if file not exist then it will give error
