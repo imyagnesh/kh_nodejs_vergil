@@ -1,16 +1,87 @@
 const fs = require('fs');
-var buff = new Buffer(1024);
+const path = require('path');
+const net = require('net');
+const net = require('net');
+
+// const arr = [...Array(10000000).keys()];
+
+// console.time('for');
+// for (let i = 0; i < arr.length; i++) {}
+// console.timeEnd('for');
+
+// console.time('while');
+// var i = 0;
+// while (i < arr.length) {
+//   i++;
+// }
+// console.timeEnd('while');
+
+// console.time('forEach');
+// arr.forEach(() => {});
+// console.timeEnd('forEach');
+
+console.table(arr);
+
+// console.error('hell');
+
+console.warn('warning');
+
+// const interval = setInterval(function () {
+//   console.log('hello');
+// }, 100);
+
+// setTimeout(() => {
+//   clearInterval(interval);
+// }, 1000);
+
+// const timer = setTimeout(function () {
+//   console.log('hello');
+// }, 10000);
+
+// setTimeout(function () {
+//   clearTimeout(timer);
+//   console.log('timer cleared');
+// }, 5000);
+
+// console.log(__filename);
+// console.log(__dirname);
+
+// fs.mkdir('/tmp/test', function (err) {
+//   if (err) {
+//     return console.error(err);
+//   }
+//   return console.log('Dir created succeessfully');
+// });
+
+// fs.rmdir('/tmp/test', function (err) {
+//   if (err) {
+//     return console.error(err);
+//   }
+//   return console.log('Dir removed succeessfully');
+// });
+
+// fs.readdir(path.resolve(__dirname, 'temp'), function (err, files) {
+//   if (err) {
+//     return console.error(err);
+//   }
+//   for (let i = 0; i < files.length; i++) {
+//     const element = files[i];
+//     console.log(element);
+//   }
+// });
+
+// var buff = new Buffer(1024);
 
 // open file
 // read / manipulate fie
 // close file
 
-fs.unlink('output2.txt', function (err) {
-  if (err) {
-    console.error(err);
-  }
-  console.log('file is is deleted');
-});
+// fs.unlink('output2.txt', function (err) {
+//   if (err) {
+//     console.error(err);
+//   }
+//   console.log('file is is deleted');
+// });
 
 // fs.open('input.txt', 'r+', function (err, fd) {
 //   if (err) {
