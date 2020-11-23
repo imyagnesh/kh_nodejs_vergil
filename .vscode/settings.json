@@ -1,7 +1,0 @@
-{
-    "javascript.format.enable": false,
-    "javascript.validate.enable": false,
-    "[javascript]": {
-        "editor.formatOnSave": true
-    }
-}
