@@ -25,6 +25,11 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "handlebars": "^4.7.6"
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "handlebars": "^4.7.6",
+    "prettier": "2.2.1"
   }
 }

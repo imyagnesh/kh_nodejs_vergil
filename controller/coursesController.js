@@ -1,53 +1,53 @@
-const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb://imyagnesh:abcd1234@ds117829.mlab.com:17829/kh_mongodb_vergil?retryWrites=false",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
-const Courses = require("../model/coursesModel");
+const mongoose = require('mongoose');
 
-var index = function (req, res, next) {
-  res.render("index");
+mongoose.connect(
+  'mongodb://imyagnesh:abcd1234@ds117829.mlab.com:17829/kh_mongodb_vergil?retryWrites=false',
+  { useNewUrlParser: true, useUnifiedTopology: true },
+);
+const Courses = require('../model/coursesModel');
+
+const index = function (req, res) {
+  res.render('index');
 };
 
-var getData = function (req, res, next) {
-  Courses.find().then((data) => {
-    res.render("index", { items: data });
+const getData = function (req, res) {
+  Courses.find().then(data => {
+    res.render('index', { items: data });
   });
 };
 
-var insertData = function (req, res, next) {
-  var item = {
+const insertData = function (req, res) {
+  const item = {
     courseName: req.body.courseName,
     Duration: req.body.Duration,
     author: req.body.author,
     pre: req.body.pre,
   };
-  var data = new Courses(item);
+  const data = new Courses(item);
   data.save();
-  res.redirect("/");
+  res.redirect('/');
 };
 
-var updateData = function (req, res, next) {
-  var id = req.body.id;
+const updateData = function (req, res) {
+  const { id } = req.body;
 
-  Courses.findById(id, function (err, doc) {
-    if (err) {
-      console.log("no record found");
-    }
+  const callback = function (err, doc) {
     doc.courseName = req.body.courseName;
     doc.Duration = req.body.Duration;
     doc.author = req.body.author;
     doc.pre = req.body.pre;
     doc.save();
-  });
+  };
 
-  res.redirect("/");
+  Courses.findById(id, callback);
+
+  res.redirect('/');
 };
 
-var deleteData = function (req, res, next) {
-  var id = req.body.id;
+const deleteData = function (req, res) {
+  const { id } = req.body;
   Courses.findByIdAndRemove(id).exec();
-  res.redirect("/");
+  res.redirect('/');
 };
 
 module.exports = { index, getData, insertData, updateData, deleteData };
