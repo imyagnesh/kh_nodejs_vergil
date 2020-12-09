@@ -4,6 +4,7 @@ module.exports = (app) => {
   const router = express.Router();
 
   const authJWT = require("../middleware/authJWT");
+  const checkCache = require("../middleware/checkCache");
 
   app.use(function (req, res, next) {
     res.header(
@@ -15,9 +16,9 @@ module.exports = (app) => {
 
   const tutorials = require("../controllers/tutorial.controller");
 
-  router.get("/", [authJWT.verifyToken], tutorials.findAll);
+  router.get("/", [authJWT.verifyToken, checkCache.checkCacheByQuery], tutorials.findAll);
 
-  router.get("/:id", tutorials.findOne);
+  router.get("/:id", [checkCache.checkCacheById], tutorials.findOne);
 
   router.post("/", [authJWT.verifyToken, authJWT.isAdmin], tutorials.create);
 

@@ -1,5 +1,8 @@
 const Sequalize = require("sequelize");
+const redis = require('redis');
 const dbConfig = require("../config/index");
+
+
 
 let sequalize;
 
@@ -13,7 +16,11 @@ if (dbConfig.DATABASE_URL) {
   });
 }
 
+const redis_client = redis.createClient(dbConfig.REDIS_PORT)
+
 const db = {};
+
+db.redis_client = redis_client;
 
 // db.Sequalize = Sequalize;
 db.sequalize = sequalize;

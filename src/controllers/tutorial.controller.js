@@ -1,12 +1,13 @@
 const Op = require("sequelize").Op;
 const db = require("../models/index");
 const Tutorial = db.tutorial;
+const redis_client = db.redis_client;
 
 const getPagination = (page, size) => {
   const limit = size ? +size : 3;
   const offset = page ? page * limit : 0;
-  return { limit , offset };
-}
+  return { limit, offset };
+};
 
 exports.create = function (req, res) {
   if (!req.body.title) {
@@ -72,18 +73,28 @@ exports.findAll = function (req, res) {
   const page = req.query.page;
   const size = req.query.size;
   const title = req.query.title;
-  const condition = title ? {
-    title: {
-      [Op.like]: `%${title}%`
-    }
-  } : null;
-  
-  const { limit, offset} = getPagination(page,size );
+  const condition = title
+    ? {
+        title: {
+          [Op.like]: `%${title}%`,
+        },
+      }
+    : null;
+
+  const { limit, offset } = getPagination(page, size);
 
   Tutorial.findAll({
-    where: condition, limit, offset
+    where: condition,
+    limit,
+    offset,
   })
     .then((data) => {
+      if (req.query !== null) {
+        const key = Object.keys(req.query).join("_");
+        redis_client.setex(key, 3600, JSON.stringify(data), () => {
+          console.log(`tutorial key: ${key} is stored in cache`);
+        })
+      }
       res.send(data);
     })
     .catch((err) => {
@@ -98,6 +109,9 @@ exports.findOne = function (req, res) {
 
   Tutorial.findByPk(id)
     .then((data) => {
+      redis_client.setex(id, 3600, JSON.stringify(data), () => {
+        console.log(`tutorial id: ${id} is stored in cache`)
+      });
       res.send(data);
     })
     .catch((err) => {
